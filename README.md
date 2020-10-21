@@ -8,18 +8,19 @@
 **1. 使用钱包 获取账户地址**
 
 客户端钱包下载地址: https://www.gatechain.io/wallets
+
 钱包使用文档: https://www.gatechain.io/docs/cn/gatechain-wallet.html
 
 下载好钱包后， 需要创建一个单签账户 > 普通账户，并复制记录 账户地址。
 
-** 2. 申请Secret_Key **
+**2. 申请Secret_Key**
 
 此密钥用于调用API， 获取区块链防伪溯源信息时使用。
 
 申请方式: 
 - 需要把`账户地址`、` 合作方信息`、`防伪溯源信息前缀` 提供给 GateChain 工作人员， 添加到后台程序中， 生成Secret Key。
 
-** 3. SDK准备 **
+**3. SDK准备**
 
 提供了JS版 的 示例程序 js-sdk.zip。JS 程序 使用 NodeJS 语言编写.
 
@@ -53,7 +54,7 @@ memo: '防伪溯源信息前缀'   # 信息需要以 防伪溯源信息前缀 �
 - 在账户详情中，可以查看该账户的私钥，复制并妥善保管它。
 ![Find Private Key](https://github.com/gatechain/gatechain-supplychain-tools/blob/main/html/images/c1435ecc-0bc8-4d82-9bb5-ef5e27f91fa1.png?raw=true)
 
-** 4. 网页如何使用SDK **
+**4. 网页如何使用SDK**
 
 SDK 使用的是 NodeJS 语言开发的。 是基于 ES6 协议的。
 网页不支持 require, import 等语法。 所以，需要转换成网页可识别的语言。

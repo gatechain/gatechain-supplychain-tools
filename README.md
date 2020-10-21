@@ -49,10 +49,10 @@ memo: '防伪溯源信息前缀'   # 信息需要以 防伪溯源信息前缀 �
 查找方式如下：
 - 在客户端钱包中，点击“单签账户”找到右上角的按钮。
 
-![Account Setting](https://github.com/gatechain/gatechain-supplychain-tools/blob/main/html/images/443671a9-14ec-40f0-8e8b-1663fb9b80dd.png?raw=true)
+![Account Setting](./html/images/443671a9-14ec-40f0-8e8b-1663fb9b80dd.png?raw=true)
 
 - 在账户详情中，可以查看该账户的私钥，复制并妥善保管它。
-![Find Private Key](https://github.com/gatechain/gatechain-supplychain-tools/blob/main/html/images/c1435ecc-0bc8-4d82-9bb5-ef5e27f91fa1.png?raw=true)
+![Find Private Key](./html/images/c1435ecc-0bc8-4d82-9bb5-ef5e27f91fa1.png?raw=true)
 
 **4. 网页如何使用SDK**
 

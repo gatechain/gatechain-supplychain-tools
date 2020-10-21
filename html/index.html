@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>示例程序</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <meta name="msapplication-TileColor" content="#206bc4"/>
+        <meta name="theme-color" content="#206bc4"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="HandheldFriendly" content="True"/>
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="robots" content="noindex,nofollow,noarchive"/>
+        <link rel="icon" href="./images/GT.png" type="image/x-icon"/>
+        <link rel="shortcut icon" href=".//images/GT.png" type="image/x-icon"/>
+        <!-- CSS files -->
+        <link href="./css/theme.min.css" rel="stylesheet"/>
+
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <meta http-equiv="Access-Control-Allow-Credentials" content="true">
+    </head>
+
+
+    <body class="antialiased">
+        <div class="page">
+            <div class="content">
+
+                <div class="container-xl">
+
+                    <div class="hr-text">示例程序</div>
+
+                    <div class="card mr-6 ml-6">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">发送方地址:</label>
+                                <input type="text" id="from_address" class="form-control" value="gt11l56tlsx9klnaqpscvsvder38jm7z472az0mly7petj29t5r3xcluuxukw68ry5jyk2slxc" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">发送方私钥:</label>
+                                <input type="text" id="secret_key" class="form-control" value="30527a5faf004ddfc24ece160c82d91dde7dc2e6d1dbd40726ec397178ba3b47" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">接收方地址:</label>
+                                <input type="text" id="to_address" class="form-control" value="gt11t0vp0j4qxny3lec26qrdn28sdzz90usfpu344krd77r8vq6gtgwazh59ks7dtyj99tfsug" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">防伪溯源信息:
+                                    <span class="form-label-description">\n表示换行</span>
+                                </label>
+                                <textarea class="form-control" id="memo">防伪溯源信息:\n\n商品名称: 茅台飞天酒 42°\n\n商品生产日期: 2010-10-10 10:10:10\n\n商品价格: ￥1010\n\n商品生产厂商:贵州茅台酒厂</textarea>
+                            </div>
+
+                            <div class="form-footer text-right">
+                                <button type="button" class="btn btn-primary" id="send_btn">发送交易</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer-subject">
+                <div class="container p-4">
+                    <div class="text-center">
+                        © 2019 - 2020
+                        <a href="https://explorer.gatechain.io/" class="link-secondary">GateChain</a>.
+                        All rights reserved
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./dist/dist.js"></script>
+
+    <script>
+        const uri = "https://api.gatenode.cc/v1/";
+
+        const blockInfoRoute = 'block/latest';
+        const broadcastRoute = 'tx';
+
+        let params = {
+            chainId: 'mainnet',
+            network: 'mainnet',
+        };
+
+        const symbol = 'NANOGT';
+
+        function sendTx() {
+            $.ajax({
+                url: uri + blockInfoRoute,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    const height = parseInt(data.height);
+
+                    // set valid height range
+                    params.validHeight = [
+                        height,
+                        height + 200,
+                    ];
+
+                    let from = $("#from_address").val();
+                    let to = $("#to_address").val();
+
+                    let tx = new Dist.Transaction(params);
+
+                    // build message
+                    let msg = Dist.Message.buildMsgSend(from, to, 1, symbol);
+                    tx.addMsg(msg);
+
+                    // set tx fee
+                    let fee = Dist.Fee.build(300000, 10000000, symbol);
+                    tx.setFee(fee);
+
+                    // sign transaction
+                    tx.sign($("#secret_key").val());
+
+                    // final data
+                    const txData = {
+                        type: "StdTx",
+                        value: tx.toObject()
+                    };
+
+                    console.log('txData', JSON.stringify(txData));
+
+                    // $.ajax({
+                    //     url: uri + broadcastRoute,
+                    //     type: 'post',
+                    //     data: JSON.stringify(txData),
+                    //     contentType: 'application/json;charset=utf-8',
+                    //     dataType: 'json',
+                    //     success: function (data) {
+                    //         console.log(data);
+                    //     },
+                    //     error: function (error) {
+                    //
+                    //     }
+                    // });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $("#send_btn").click(function() {
+                sendTx();
+            });
+        });
+    </script>
+</html>

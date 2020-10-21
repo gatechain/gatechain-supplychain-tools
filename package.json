@@ -1,0 +1,24 @@
+{
+  "name": "js-sdk",
+  "version": "1.0.0",
+  "description": "send transaction",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gatechain",
+  "license": "ISC",
+  "dependencies": {
+    "bech32": "^1.1.4",
+    "bip32-ed25519": "0.0.4",
+    "create-hash": "^1.2.0",
+    "is_js": "^0.9.0",
+    "random-buffer": "^0.1.0",
+    "request": "^2.88.2",
+    "safe-buffer": "^5.2.1",
+    "varstruct": "^6.1.3"
+  }
+}

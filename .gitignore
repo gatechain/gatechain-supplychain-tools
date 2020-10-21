@@ -1,0 +1,32 @@
+# next.js build output
+.idea
+.next
+
+# dotenv environment variables file
+env
+.env
+
+# Optional npm cache directory
+.npm
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Mac file
+.DS_Store
+
+# Npm package lock file
+package-lock.json
+
+# Program runtime files
+run
+
+# Program log files
+logs
+test_net_logs
+dev_net_logs
+test
+awesomeProject
+.nohup.out.icloud
+totalTxs.txt
